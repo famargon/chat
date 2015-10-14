@@ -20,7 +20,7 @@ def acceptConn():
 		sNew,pNew= s.accept()
 		s.settimeout(.1)
 		existsuserName= 0
-		while !existsuserName:
+		while existsuserName == 0:
 			sNew.send("Introduce tu nuevo nombre de usuario")
 			userName =sNew.recv(2048)
 			if userName not in dbUsers:
@@ -38,22 +38,24 @@ def getMsg(socket):
 		ret=socket.recv(4096)
 		socket.settimeout(.1)
 		if str(ret) == "/quit" or str(ret) == "/Quit":
-		        host,port=socket.getpeername()
-                	print "[%s:%s] ha salido." % (str(host), str(port))
-               		list.remove(socket)
-                	socket.close()
+			host,port=socket.getpeername()
+			print ("["+str(host)+" :"+str(port)+"] ha salido.")
+			list.remove(socket)
+			socket.close()
 			return None 
 		return ret
 	except:
 		host,port=socket.getpeername()
-		print "[%s:%s] ha salido." % (str(host), str(port))
+		
+		print ("["+str(host)+" :"+str(port)+"] ha salido.")		
+
 		list.remove(socket)
 		return None 
 
 global s
 s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(("",9999))
-print "Server working on port 9999"
+s.bind(("",8888))
+print( "Server working on port 9999")
 s.listen(10)
 global list
 list=[s]

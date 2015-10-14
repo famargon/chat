@@ -5,10 +5,10 @@ import socket, sys , select
 s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try :
-	s.connect(("localhost" ,9999))
+	s.connect(("localhost" ,8888))
 except :
 	sys.exit()
-print "Connection succesfully"
+print ("Connection succesfully")
  
 list = [sys.stdin, s]
 
@@ -20,9 +20,9 @@ while True:
 			data=i.recv(4096)
 			if data:
 				sys.stdout.write(data)
-			else : 
-				print "Disconnected"
-				sys.exit()
+			"""else : 
+				print ("Disconnected")
+				sys.exit()"""
 		else : 
 			msg=sys.stdin.readline()
 			s.send(msg)
